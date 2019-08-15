@@ -2,4 +2,5 @@
 
 Rep para estudo do Swagger
 
-Editor: http://editor.swagger.io/
+[Editor Swagger](http://editor.swagger.io/)
+[Respostas para endpoints](https://http.cat/)
