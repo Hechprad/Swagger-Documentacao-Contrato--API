@@ -16,36 +16,84 @@ info:
     name: Suporte
     url: http:localhost:8085/banco-api/v1/suporte
     email: suporte@bancoapi.com
+    
+    
+securityDefinitions:
+  BasicAuth:
+    type: basic
 
+security: 
+  - BasicAuth: []
+  
+consumes:
+  - application/json
+produces:
+  - application/json
+  
+  
 paths:
   '/cliente':
     post:
       summary: Cadastra Cliente
       description: Cadastra um novo Cliente
-      consumes:
-        - application/json
-      produces:
-        - application/json  
       operationId: cadastraCliente
       parameters:
         - in: body
           name: cliente_
           schema:
             $ref: '#/definitions/Cliente'
-            
       responses:
         201:
           description: Cadastro efetuado com sucesso
           schema:
-            type: object
-            properties:
-              titular:
-                type: string
-                example:
+            $ref: '#/definitions/Cliente'
         400:
           description: Requisição Inválida
         500:
           description: Erro interno no servidor
+
+  '/conta/{agencia}/{numero}/{digito}/saldo':
+    get:
+      summary: Consulta Saldo
+      description: Mostra o saldo da conta do cliente
+      operationId: consultaSaldo
+      security:
+        - BasicAuth: []
+      parameters:
+        - in: path
+          name: agencia
+          type: integer
+          format: int32
+          required: true
+        - in: path
+          name: numero
+          type: integer
+          format: int64
+          required: true
+        - in: path
+          name: digito
+          type: integer
+          format: int32
+          required: true
+        - in: header
+          name: Authorization
+          type: string
+          required: true
+      responses:
+        200:
+          description: Consulta efetuada com sucesso
+          schema:
+            type: number
+            format: double
+        400:
+          description: Requisição Inválida
+        401:
+          description: Requisição não autorizada
+        500:
+          description: Erro interno no servidor
+        
+          
+    
 
 definitions:
   
@@ -72,10 +120,26 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Conta'    
+  
   Conta:
     type: object
     properties:
-      id:
+      agencia:
+        type: integer
+        format: int32
+        example: 123
+      numero:
         type: integer
         format: int64
-        example: 1234
+        example: 098765
+      digito:
+        type: integer
+        format: int32
+        example: 9
+      saldo:
+        type: number
+        format: double
+        example: 110.55
+      cliente:
+        $ref: '#/definitions/Cliente'
+        
