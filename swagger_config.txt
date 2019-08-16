@@ -27,9 +27,16 @@ consumes:
   - application/json
 produces:
   - application/json
+tags:
+  - name: Cliente
+  - name: Conta
+  - name: Extrato
+  - name: Transacao
 paths:
   '/cliente':
     post:
+      tags:
+        - Cliente
       summary: Cadastra Cliente
       description: Cadastra um novo Cliente
       operationId: cadastraCliente
@@ -49,6 +56,8 @@ paths:
           description: Erro interno no servidor
   '/conta/{agencia}/{numero}/{digito}/saldo':
     get:
+      tags:
+       - Conta
       summary: Consulta Saldo
       description: Mostra o saldo da conta do cliente
       operationId: consultaSaldo
@@ -88,6 +97,8 @@ paths:
           description: Erro interno no servidor
   '/transacao':
     post:
+      tags:
+        - Transacao
       summary: Cadastra Transação na Conta
       description: Cadastra uma transação de débito ou depósito na conta.
       security:
@@ -123,6 +134,8 @@ paths:
           description: Erro interno no servidor
   '/extrato/{agencia}/{numero}/{digito}':
     get:
+      tags:
+        - Extrato
       summary: Consulta Extrado
       description: Consulta o extrato da conta do cliente.
       operationId: consultaExtrato
@@ -161,6 +174,8 @@ paths:
           description: Erro interno no servidor
   '/transacao/{codigo}':
     put:
+      tags:
+        - Transacao
       summary: Altera o valor Transação
       description: Altera o valor de uma transação existente do cliente.
       operationId: alteraValorTransacao
@@ -191,6 +206,8 @@ paths:
         500:
           description: Erro interno no servidor
     delete:
+      tags:
+        - Transacao
       summary: Deleta a Transação
       description: Deleta uma transação existente na conta do cliente.
       operationId: deletaTransacao
