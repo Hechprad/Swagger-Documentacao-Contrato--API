@@ -195,8 +195,32 @@ paths:
           description: Requisição não autorizada
         500:
           description: Erro interno no servidor
+    delete:
+      summary: Deleta a Transação
+      description: Deleta uma transação existente na conta do cliente.
+      operationId: deletaTransacao
+      security:
+        - BasicAuth: []
+      parameters:
+        - in: path
+          name: codigo
+          type: integer
+          format: int64
+          required: true
+        - in: header
+          name: Authorization
+          type: string
+          required: true
+      responses:
+        204:
+          description: Transação deletada com sucesso
+        400:
+          description: Requisição Inválida
+        401:
+          description: Requisição não autorizada
+        500:
+          description: Erro interno no servidor
     
-
 
 definitions:
   
