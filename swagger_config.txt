@@ -1,19 +1,14 @@
 swagger: '2.0'
-
 host: virtserver.swaggerhub.com
 basePath: /hech/banco-digital-api/1.0.0
 schemes:
  - https
  - http
-
-
 # host: localhost:8085
 # basePath: /banco-api/v1
 # schemes: 
 #   - http
 #   - https
-  
-
 info:
   version: 1.0.0
   title: Bank API
@@ -220,10 +215,7 @@ paths:
           description: Requisição não autorizada
         500:
           description: Erro interno no servidor
-    
-
 definitions:
-  
   Cliente:
     type: object
     properties:
@@ -247,7 +239,6 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Conta'
-
   Conta:
     type: object
     properties:
@@ -273,7 +264,6 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Transacao'
-
   Transacao:
     type: object
     properties:
